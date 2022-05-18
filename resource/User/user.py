@@ -2,11 +2,19 @@ from typing_extensions import Required
 from flask_restful import Resource, reqparse
 
 parser = reqparse.RequestParser()
-parser.add_argument('user_name', type=str, help='Nome do usuário', required=True)
+parser.add_argument('name', type=str, help='Campo "name" requirido', required=True)
+parser.add_argument('email', type=str, help='Campo "email" requirido', required=True)
 
-class User(Resource):
+class ListUser(Resource):
     def get(self, id):
-        return {'hello': 'world'}
-    def post(self, id):
+        return {'id': id}
+
+class CreateUser(Resource):
+    def post(self):
         args = parser.parse_args()
-        return {'hello': 'world'}
+        return {'args': args}
+
+class DeleteUser(Resource):
+    def delete(self, id):
+        return {'id': id}
+        
