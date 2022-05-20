@@ -1,15 +1,20 @@
 from flask import Flask
 from flask_restful import Api
-from resource.User.user import ListUser, CreateUser, DeleteUser
+from Model.user import ListAllUsers, ListUser, CreateUser, DeleteUser, UpdateUser
 
 app = Flask(__name__)
 api = Api(app)
 
-# Routes
+# RoutesListAllUsers
+api.add_resource(ListAllUsers, '/listAll/user')
 api.add_resource(ListUser, '/list/user/<int:id>')
 api.add_resource(DeleteUser, '/delete/user/<int:id>')
 api.add_resource(CreateUser, '/create/user')
-DeleteUser
+api.add_resource(UpdateUser, '/update/user')
+
+@app.route('/')
+def index():
+    return 'Home'
 
 if __name__ == '__main__':
-    app.run(debug=True)
+    app.run(port=5000, debug=True)
